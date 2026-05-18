@@ -6,7 +6,7 @@
 /*   By: adarabi <adarabi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 18:51:16 by adarabi           #+#    #+#             */
-/*   Updated: 2026/05/18 22:09:23 by adarabi          ###   ########.fr       */
+/*   Updated: 2026/05/18 23:29:39 by adarabi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,11 @@ char	*fileread(int fd, char *s)
 		s = ft_strjoin(s, buff);
 	}
 	free(buff);
+	if (!s || ft_strlen(s) == 0)
+	{
+		free(s);
+		return (0);
+	}
 	return (s);
 }
 
