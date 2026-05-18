@@ -6,7 +6,7 @@
 /*   By: adarabi <adarabi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 18:51:44 by adarabi           #+#    #+#             */
-/*   Updated: 2026/05/18 22:01:50 by adarabi          ###   ########.fr       */
+/*   Updated: 2026/05/18 22:05:39 by adarabi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 
 void    ft_strlcpy(char *dst, char *src, size_t size);
 size_t  ft_strlen(char *str);
