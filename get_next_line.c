@@ -6,11 +6,16 @@
 /*   By: adarabi <adarabi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 18:51:16 by adarabi           #+#    #+#             */
-/*   Updated: 2026/05/18 19:13:56 by adarabi          ###   ########.fr       */
+/*   Updated: 2026/05/18 20:02:04 by adarabi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 char *get_next_line(int fd)
 {
 
+}
+
+int main()
+{
+    return 0;
 }
