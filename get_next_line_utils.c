@@ -6,7 +6,7 @@
 /*   By: adarabi <adarabi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 18:52:00 by adarabi           #+#    #+#             */
-/*   Updated: 2026/05/18 23:36:05 by adarabi          ###   ########.fr       */
+/*   Updated: 2026/05/19 20:36:53 by adarabi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	ft_strlen(char *str)
 	size_t	count;
 
 	count = 0;
-	while (str[count] != 0)
+	while (str[count])
 		count++;
 	return (count);
 }
@@ -44,22 +44,24 @@ char	*ft_strjoin(char *s1, char *s2)
 	size_t	len_s2;
 	char	*res;
 
-	if (!s1)
-	{
-		s1 = malloc(1);
-		s1[0] = '\0';
-	}
-	if (!s2)
-	{
-		s2 = malloc(1);
-		s2[0] = '\0';
-	}
-	len_s1 = ft_strlen((char *)s1);
-	len_s2 = ft_strlen((char *)s2);
-	res = malloc(len_s1 + len_s2 + 1);
-	if (res == NULL)
+	len_s1 = 0;
+	len_s2 = 0;
+	if (!s1 && !s2)
 		return (NULL);
-	ft_strlcpy(res, s1, len_s1 + 1);
+	if (s1)
+		len_s1 = ft_strlen(s1);
+	if (s2)
+		len_s2 = ft_strlen(s2);
+	res = malloc(len_s1 + len_s2 + 1);
+	if (!res)
+	{
+		free(s1);
+		return (NULL);
+	}
+	if (s1)
+		ft_strlcpy(res, s1, len_s1 + 1);
+	else
+		res[0] = '\0';
 	ft_strlcpy(&res[len_s1], s2, len_s2 + 1);
 	free(s1);
 	return (res);
