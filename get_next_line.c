@@ -6,7 +6,7 @@
 /*   By: adarabi <adarabi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 18:51:16 by adarabi           #+#    #+#             */
-/*   Updated: 2026/05/19 22:11:11 by adarabi          ###   ########.fr       */
+/*   Updated: 2026/05/19 22:16:40 by adarabi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,3 +109,23 @@ char	*get_next_line(int fd)
 	str[fd] = line_after(str[fd]);
 	return (first_line);
 }
+
+// #include <fcntl.h>
+// #include <stdio.h>
+
+// int main(void)
+// {
+//     int     fd;
+//     char    *line;
+
+//     fd = open("file-one.txt", O_RDONLY);
+//     if (fd < 0)
+//         return (1);
+//     while ((line = get_next_line(fd)) != NULL)
+//     {
+//         printf("%s", line);
+//         free(line);
+//     }
+//     close(fd);
+//     return (0);
+// }
