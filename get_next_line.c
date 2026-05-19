@@ -6,7 +6,7 @@
 /*   By: adarabi <adarabi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 18:51:16 by adarabi           #+#    #+#             */
-/*   Updated: 2026/05/19 20:40:13 by adarabi          ###   ########.fr       */
+/*   Updated: 2026/05/19 22:11:11 by adarabi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ char	*get_first_line(char *s)
 	char	*str;
 	int		idx;
 
-	if (!s || !s[0])
-		return (NULL);
 	idx = 0;
 	while (s[idx] && s[idx] != '\n')
 		idx++;
@@ -39,12 +37,9 @@ char	*get_first_line(char *s)
 
 char	*line_after(char *s)
 {
-	char	*str;
-	int		idx;
-	int		idx2;
+	int	idx;
 
 	idx = 0;
-	idx2 = 0;
 	while (s[idx] && s[idx] != '\n')
 		idx++;
 	if (!s[idx])
@@ -52,46 +47,30 @@ char	*line_after(char *s)
 		free(s);
 		return (NULL);
 	}
-	str = malloc(sizeof(char) * (ft_strlen(s) - idx + 1));
-	if (!str)
-	{
-		free(s);
-		return (NULL);
-	}
-	idx++;
-	while (s[idx])
-		str[idx2++] = s[idx++];
-	str[idx2] = '\0';
-	free(s);
-	return (str);
+	return (alloc_after(s, idx));
 }
 
 static char	*read_loop(int fd, char *s, char *buff)
 {
-	int	count;
+	size_t	len;
 
-	count = 1;
-	while (count > 0)
+	len = 0;
+	if (s)
+		len = ft_strlen(s);
+	while (1)
 	{
-		count = read(fd, buff, BUFFER_SIZE);
-		if (count == -1)
-		{
-			free(s);
+		buff[0] = '\0';
+		if (!do_read(fd, &s, buff, &len))
 			return (NULL);
-		}
-		if (count == 0)
+		if (buff[0] == '\0')
 			break ;
-		buff[count] = '\0';
-		s = ft_strjoin(s, buff);
-		if (!s)
-			return (NULL);
 		if (ft_chrfind(buff, '\n'))
 			break ;
 	}
 	return (s);
 }
 
-char	*file_read(int fd, char *s)
+char	*fileread(int fd, char *s)
 {
 	char	*buff;
 
@@ -113,7 +92,7 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || fd >= 256 || BUFFER_SIZE <= 0)
 		return (NULL);
-	str[fd] = file_read(fd, str[fd]);
+	str[fd] = fileread(fd, str[fd]);
 	if (!str[fd] || !str[fd][0])
 	{
 		free(str[fd]);
@@ -130,23 +109,3 @@ char	*get_next_line(int fd)
 	str[fd] = line_after(str[fd]);
 	return (first_line);
 }
-
-// #include <fcntl.h>
-// #include <stdio.h>
-
-// int main(void)
-// {
-//     int     fd;
-//     char    *line;
-
-//     fd = open("file-one.txt", O_RDONLY);
-//     if (fd < 0)
-//         return (1);
-//     while ((line = get_next_line(fd)) != NULL)
-//     {
-//         printf("%s", line);
-//         free(line);
-//     }
-//     close(fd);
-//     return (0);
-// }
