@@ -28,7 +28,7 @@ Each call to `get_next_line()` returns:
 
 **Algorithm**
 
-The function uses a static array of pointers `str[256]` — one slot per possible file descriptor. Between calls, any unprocessed bytes read from the fd are kept in `str[fd]`.
+The function uses a static array of pointers `str[4096]` — one slot per possible file descriptor. Between calls, any unprocessed bytes read from the fd are kept in `str[fd]`.
 
 Each call works in three steps:
 1. ***Read***: fill `str[fd]` by reading BUFFER_SIZE bytes at a time into a temporary buffer, joining each chunk onto `str[fd]`, stopping as soon as a `\n` is found in the buffer or EOF is reached.
